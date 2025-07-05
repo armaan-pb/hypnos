@@ -1,0 +1,5 @@
+hypnosvenv/
+__pycache__/
+*.pyc
+*.log
+
