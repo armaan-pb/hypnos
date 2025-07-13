@@ -11,8 +11,6 @@
 - Enter a start and end time for a sleep block
 - Automatically calculate the duration slept
 
-This version is for **testing and validation only**, A full ship will be coming.
-
 ---
 
 ## Features (MVP)
