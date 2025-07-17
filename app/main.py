@@ -8,7 +8,7 @@ from logic import SleepSessionManager
 def main():
     app = QApplication(sys.argv)
 
-    session_manager = SleepSessionManager()
+    session_manager = SleepSessionManager
 
     window = MainWindow(session_manager)
     window.show()
