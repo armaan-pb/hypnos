@@ -29,8 +29,9 @@ GRID_ALPHA = 0.3
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, session_manager):
         super().__init__()
+        self.session_manager = session_manager
         self.setGeometry(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT)
         self.setWindowTitle("Hypnos")
         self.setWindowIcon(QIcon("assets/Hypnos-icon.png"))
@@ -50,13 +51,20 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.title_bar)
 
         body = QWidget()
+        self.setStyleSheet(f"""
+            QWidget {{background-color: #121212;}}
+        """)
         body_layout = QHBoxLayout()
         body_layout.setContentsMargins(0, 0, 0, 0)
         body.setLayout(body_layout)
         main_layout.addWidget(body)
 
-        self.sleep_chart = SleepDonutChart(sleep_sessions)
+        self.sleep_chart = SleepDonutChart(self.session_manager.get_sessions())
         body_layout.addWidget(self.sleep_chart)
+
+    def refresh_chart(self):
+        self.sleep_chart.sleep_sessions = self.session_manager.get_sessions()
+        self.sleep_chart.plotSessions()
 
 
 class TitleBar(QFrame):
@@ -204,16 +212,10 @@ class SleepDonutChart(QWidget):
             transform=self.ax.transData._b,
             facecolor=BACKGROUND_COLOR,
             edgecolor=FOREGROUND_COLOR,
-            linewidth=2,
+            linewidth=1,
             zorder=3
         )
 
         self.ax.add_artist(donut_hole)
 
         self.canvas.draw()
-
-
-sleep_sessions = [
-    {'start': 22, 'end': 6},
-    {'start': 12, 'end': 14}
-]
