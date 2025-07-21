@@ -6,18 +6,15 @@
 
 ## Overview
 
-**Hypnos** helps you track and calculate sleep durations for polyphasic schedules. The MVP allows you to:
+**Hypnos** is a tool for sleep tracking/logging and data visualization.
 
-- Enter a start and end time for a sleep block
-- Automatically calculate the duration slept
-
----
 
 ## Features (MVP)
 
-- ✅ Log sleep blocks (start time, end time)
-- ✅ Automatic duration calculation
-- ❌ No persistent storage (yet)
+- Log sleep blocks (start time, end time)
+- Automatic duration calculation
+- Persistent Storage
+- Chart to Visualize the sleep blocks
 
 ---
 
@@ -36,5 +33,5 @@ source hypnosvenv/bin/activate
 pip install -r requirements.txt
 
 # Run the app
-python hypnos/main.py
+python Hypnos/app/main.py
 ```
