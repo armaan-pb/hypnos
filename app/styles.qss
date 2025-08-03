@@ -1,0 +1,255 @@
+/* =========================================================
+   Hypnos Stylesheet
+   ---------------------------------------------------------
+   Dark theme with placeholder variables for easy theming.
+   Replace {{PLACEHOLDER}} in Python before loading.
+   ========================================================= */
+
+/* -----------------------
+   ROOT THEME PLACEHOLDERS
+   ----------------------- */
+/*
+   {{BG_DARK}}        Main background
+   {{BG_PANEL}}       Panels
+   {{BG_TITLEBAR}}    Title bar
+   {{BG_INPUT}}       Input fields
+   {{BG_HOVER}}       Hover background
+   {{ACCENT}}         Primary accent color
+   {{ACCENT_HOVER}}   Accent hover color
+   {{ACCENT_PRESS}}   Accent pressed color
+   {{BORDER}}         Border color
+   {{TEXT}}           Main text
+   {{TEXT_MUTED}}     Muted text
+   {{GRIDLINE}}       Table/grid lines
+*/
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+QMainWindow, #centralWidget, #body {
+    background-color: {{BG_DARK}};
+    color: {{TEXT}};
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+}
+
+*:focus {
+    outline: none;
+}
+
+/* =========================================================
+   TITLE BAR
+   ========================================================= */
+#titleBar {
+    background-color: {{BG_TITLEBAR}};
+    color: {{TEXT}};
+    border-bottom: 1px solid {{BG_HOVER}};
+}
+
+#titleLabel {
+    color: {{TEXT}};
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#minButton, #maxButton, #closeButton {
+    background-color: transparent;
+    border: none;
+    color: {{TEXT}};
+    font-size: 16px;
+    padding: 0 8px;
+    min-width: 30px;
+    min-height: 30px;
+}
+#minButton:hover, #maxButton:hover {
+    background-color: {{BG_HOVER}};
+}
+#closeButton:hover {
+    background-color: #ff5c5c;
+}
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+#sessionsPanel {
+    background-color: {{BG_PANEL}};
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 350px;
+    min-width: 300px;
+    margin: 10px;
+    border: 1px solid {{BORDER}};
+}
+
+#sessionsTitleLabel {
+    color: {{TEXT}};
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+QLineEdit, #startInput, #endInput {
+    color: {{TEXT}};
+    background-color: {{BG_INPUT}};
+    border: 1px solid {{BORDER}};
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    min-height: 20px;
+}
+QLineEdit:focus, #startInput:focus, #endInput:focus {
+    border-color: {{ACCENT}};
+    background-color: #333;
+}
+QLineEdit::placeholder, #startInput::placeholder, #endInput::placeholder {
+    color: {{TEXT_MUTED}};
+}
+
+/* =========================================================
+   PRIMARY BUTTONS
+   ========================================================= */
+#addButton {
+    background-color: {{ACCENT}};
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    min-height: 20px;
+}
+#addButton:hover {
+    background-color: {{ACCENT_HOVER}};
+}
+#addButton:pressed {
+    background-color: {{ACCENT_PRESS}};
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+#sessionTable {
+    background-color: #1a1a1a;
+    alternate-background-color: #242424;
+    color: {{TEXT}};
+    border: 2px solid {{BORDER}};
+    border-radius: 10px;
+    gridline-color: {{GRIDLINE}};
+    selection-background-color: {{ACCENT}};
+    margin: 10px 0px;
+    font-size: 12px;
+}
+#sessionTable::item {
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+}
+#sessionTable::item:hover {
+    background-color: {{BG_HOVER}};
+}
+#sessionTable::item:alternate {
+    background-color: #242424;
+}
+
+/* Table Headers */
+#sessionTable QHeaderView {
+    background-color: {{BG_INPUT}};
+}
+#sessionTable QHeaderView::section {
+    background-color: {{BG_INPUT}};
+    color: {{TEXT}};
+    border: 1px solid {{BORDER}};
+    padding: 12px 8px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+}
+#sessionTable QHeaderView::section:hover {
+    background-color: #333;
+}
+
+/* Corner Button */
+#sessionTable QTableCornerButton::section {
+    background-color: {{BG_INPUT}};
+    border: 1px solid {{BORDER}};
+}
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+#sessionTable QScrollBar:vertical {
+    background-color: #1a1a1a;
+    width: 14px;
+    border-radius: 7px;
+    margin: 2px;
+}
+#sessionTable QScrollBar::handle:vertical {
+    background-color: #555;
+    border-radius: 7px;
+    min-height: 25px;
+}
+#sessionTable QScrollBar::handle:vertical:hover {
+    background-color: #777;
+}
+#sessionTable QScrollBar::handle:vertical:pressed {
+    background-color: #999;
+}
+
+/* =========================================================
+   ACTION BUTTONS (EDIT / DELETE)
+   ========================================================= */
+#editButton {
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+#editButton:hover {
+    background-color: #555;
+}
+#deleteButton {
+    background-color: {{ACCENT}};
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+#deleteButton:hover {
+    background-color: {{ACCENT_HOVER}};
+}
+
+/* =========================================================
+   DIALOGS
+   ========================================================= */
+#addSessionDialog, #editDialog, #warningDialog {
+    background-color: {{BG_INPUT}};
+    color: {{TEXT}};
+}
+#addSessionDialog QLabel, #editDialog QLabel, #warningDialog QLabel {
+    color: {{TEXT}};
+    font-weight: bold;
+}
+#addSessionDialog QLineEdit, #editDialog QLineEdit {
+    color: {{TEXT}};
+}
+#warningDialog QPushButton, #addSessionDialog QPushButton, #editDialog QPushButton {
+    background-color: {{ACCENT}};
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    height: 15px;
+    font-weight: bold;
+}
+#warningDialog QPushButton:hover, #addSessionDialog QPushButton:hover, #editDialog QPushButton:hover {
+    background-color: {{ACCENT_HOVER}};
+}
+#warningDialog QPushButton:pressed, #addSessionDialog QPushButton:pressed, #editDialog QPushButton:pressed {
+    background-color: {{ACCENT_PRESS}};
+}
