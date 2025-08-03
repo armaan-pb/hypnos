@@ -1,9 +1,12 @@
 name: Build & Release Hypnos
 
+permissions:
+  contents: write
+
 on:
   push:
     tags:
-      - "v*" # Runs only when you push a tag like v1.0.1
+      - "v*"
 
 jobs:
   build:
@@ -22,7 +25,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxkbcommon-x11-0 libxcb-image0 libxcb-keysyms1 \
+            libxcb-render-util0 libxcb-icccm4 libxcb-xinerama0 libxcb-shape0 libxcb-xkb1
+
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -32,9 +42,14 @@ jobs:
         run: |
           pyinstaller --name "Hypnos-${{ github.ref_name }}" --onefile app/main.py
 
+      - name: Package binary into ZIP
+        run: |
+          cd dist
+          zip -r "../Hypnos-${{ github.ref_name }}-${{ runner.os }}.zip" *
+
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/*
+          files: Hypnos-${{ github.ref_name }}-${{ runner.os }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
