@@ -42,10 +42,17 @@ jobs:
         run: |
           pyinstaller --name "Hypnos-${{ github.ref_name }}" --onefile app/main.py
 
-      - name: Package binary into ZIP
+      - name: Package binary on Linux/macOS
+        if: runner.os != 'Windows'
         run: |
           cd dist
           zip -r "../Hypnos-${{ github.ref_name }}-${{ runner.os }}.zip" *
+
+      - name: Package binary on Windows
+        if: runner.os == 'Windows'
+        run: |
+          cd dist
+          powershell Compress-Archive -Path * -DestinationPath "../Hypnos-${{ github.ref_name }}-${{ runner.os }}.zip"
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
