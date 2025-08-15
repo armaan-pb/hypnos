@@ -40,7 +40,15 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --name "Hypnos-${{ github.ref_name }}" --onefile app/main.py
+          pyinstaller \
+            --name "Hypnos-${{ github.ref_name }}" \
+            --onefile app/main.py \
+            --hidden-import PyQt5 \
+            --hidden-import PyQt5.QtCore \
+            --hidden-import PyQt5.QtGui \
+            --hidden-import PyQt5.QtWidgets \
+            --hidden-import PyQt5.QtSvg \
+            --collect-all PyQt5
 
       - name: Package binary on Linux/macOS
         if: runner.os != 'Windows'
